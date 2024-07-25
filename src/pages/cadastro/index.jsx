@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom'
 import styles from './styles.module.css'
+import { useForm } from 'react-hook-form'
 
 export function CadastroPage() {
+    const { register, handleSubmit } = useForm()
+
+    function onSubmit(data) {
+        // registrar nome, email e senha
+        console.log(data)
+    }
+
     return (
         <main className={styles.container}>
             <div className={styles.formSignin}>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <img 
                         className="mb-4" 
                         src="https://lab365-admin.hml.sesisenai.org.br/javax.faces.resource/img/logo-lab.png" 
@@ -15,20 +23,37 @@ export function CadastroPage() {
                     <h1 className="h3 mb-3 fw-normal">Preencha todos os campos para efetuar o cadastro.</h1>
                     
                     <div className="mb-3">
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Nome</label>
+                        <input 
+                            className="form-control" 
+                            id="exampleFormControlInput1" 
+                            placeholder="name@example.com" 
+                            {...register("name", { required: true })}
+                        />
                     </div>
 
                     
                     <div className="mb-3">
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Email</label>
+                        <input 
+                            type="email" 
+                            className="form-control" 
+                            id="exampleFormControlInput1" 
+                            placeholder="name@example.com" 
+                            {...register("email")}
+                        />
                     </div>
 
                     
                     <div className="mb-3">
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Senha</label>
+                        <input 
+                            type="password" 
+                            className="form-control" 
+                            id="exampleFormControlInput1" 
+                            placeholder="name@example.com" 
+                            {...register("password")}
+                        />
                     </div>
 
                     <button className="btn btn-primary w-100 py-2" type="submit">Entrar</button>
